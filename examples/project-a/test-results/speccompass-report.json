@@ -1,0 +1,98 @@
+{
+  "config": {
+    "name": "project-a",
+    "baseURL": "http://localhost:3000",
+    "vitest": {
+      "include": [
+        "tests/unit/**/*.test.ts"
+      ],
+      "command": "echo",
+      "args": [
+        "vitest demo executed"
+      ],
+      "passWithNoTests": true
+    },
+    "playwright": {
+      "testDir": "tests/e2e",
+      "command": "echo",
+      "args": [
+        "playwright demo executed"
+      ],
+      "headless": true,
+      "trace": "on-first-retry"
+    },
+    "artifacts": {
+      "outputDir": ".speccompass/artifacts",
+      "screenshot": "only-on-failure",
+      "video": "retain-on-failure",
+      "trace": "on-first-retry"
+    },
+    "results": {
+      "outputDir": "test-results"
+    }
+  },
+  "vitest": {
+    "suite": "vitest",
+    "status": "passed",
+    "command": "echo",
+    "args": [
+      "run",
+      "--passWithNoTests",
+      "--config",
+      "/var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-TqRUvS/vitest.speccompass.config.ts",
+      "vitest demo executed",
+      "--reporter=json",
+      "--outputFile",
+      "/var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-report-A6kVhd/vitest.report.json"
+    ],
+    "exitCode": 0,
+    "stdout": "run --passWithNoTests --config /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-TqRUvS/vitest.speccompass.config.ts vitest demo executed --reporter=json --outputFile /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-report-A6kVhd/vitest.report.json\n",
+    "stderr": "",
+    "summary": "Vitest finished running via explicit.",
+    "durationMs": 4,
+    "failureDetails": [],
+    "metrics": {
+      "failureCount": 0,
+      "warningCount": 0
+    },
+    "artifacts": []
+  },
+  "playwright": {
+    "suite": "playwright",
+    "status": "passed",
+    "command": "echo",
+    "args": [
+      "test",
+      "tests/e2e",
+      "--config",
+      "/var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-playwright-jGXaIY/playwright.speccompass.config.cjs",
+      "playwright demo executed",
+      "--reporter=json"
+    ],
+    "exitCode": 0,
+    "stdout": "test tests/e2e --config /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-playwright-jGXaIY/playwright.speccompass.config.cjs playwright demo executed --reporter=json\n",
+    "stderr": "",
+    "summary": "Playwright finished running via explicit.",
+    "durationMs": 2,
+    "failureDetails": [],
+    "metrics": {
+      "failureCount": 0,
+      "warningCount": 0
+    },
+    "artifacts": []
+  },
+  "hasFailures": false,
+  "summary": {
+    "totalSuites": 2,
+    "failedSuites": 0,
+    "skippedSuites": 0,
+    "totalFailures": 0,
+    "totalArtifacts": 0,
+    "durationMs": 6
+  },
+  "output": {
+    "outputDir": "/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results",
+    "textReportPath": "/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results/speccompass-report.txt",
+    "jsonReportPath": "/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results/speccompass-report.json"
+  }
+}

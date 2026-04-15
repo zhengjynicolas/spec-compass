@@ -1,0 +1,42 @@
+{
+  "name": "speccompass",
+  "version": "0.1.0",
+  "description": "A lightweight Vitest and Playwright init/run kernel for host projects.",
+  "private": false,
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "bin": {
+    "speccompass": "dist/cli/index.js"
+  },
+  "keywords": [
+    "testing",
+    "typescript",
+    "vitest",
+    "playwright",
+    "cli",
+    "npm"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/clean-dist.mjs && tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build && npm test",
+    "start": "node dist/cli/index.js run",
+    "test": "vitest run --config tests/vitest/config.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "project-a",
+  "private": true,
+  "scripts": {
+    "test:auto": "speccompass run",
+    "test:auto:init": "speccompass init"
+  }
+}
