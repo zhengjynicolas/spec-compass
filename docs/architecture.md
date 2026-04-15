@@ -1,6 +1,6 @@
 # Architecture
 
-`speccompass` 是一个小内核工具，不是测试平台。
+`SpecCompass` 是一个小内核工具，不是测试平台。
 
 它只做两件事：
 

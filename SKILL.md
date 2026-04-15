@@ -1,15 +1,15 @@
 ---
 name: speccompass-workflow
-description: Use this skill when working in a project that uses speccompass to initialize a shared Vitest + Playwright test workspace, generate or update tests, run them through the speccompass CLI, and iterate from reports and Playwright artifacts. Trigger when the task is to add tests, repair tests, standardize test structure, or use speccompass's init/run workflow in a host project.
+description: Use this skill when working in a project that uses SpecCompass to initialize a shared Vitest + Playwright test workspace, generate or update tests, run them through the speccompass CLI, and iterate from reports and Playwright artifacts. Trigger when the task is to add tests, repair tests, standardize test structure, or use SpecCompass's init/run workflow in a host project.
 ---
 
-# Auto Test Workflow
+# SpecCompass Workflow
 
-Use this skill when the repo or host project uses `speccompass` as the test kernel.
+Use this skill when the repo or host project uses `SpecCompass` as the test kernel.
 
 ## Goal
 
-Treat `speccompass` as a small execution kernel:
+Treat `SpecCompass` as a small execution kernel:
 
 - `init` creates the standard test workspace
 - `run` executes Vitest and Playwright
@@ -42,7 +42,7 @@ npx speccompass init
 npx speccompass run
 ```
 
-Inside the `speccompass` repo itself, use:
+Inside the `SpecCompass` repo itself, use:
 
 ```bash
 node dist/cli/index.js init --project <target-project>

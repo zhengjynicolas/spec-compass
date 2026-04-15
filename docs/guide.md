@@ -2,7 +2,7 @@
 
 ## 适用场景
 
-本向导适用于把 `speccompass` 作为 npm 开发依赖接入任意业务项目，用来快速建立统一的 `Vitest + Playwright` 测试工作区。
+本向导适用于把 `SpecCompass` 作为 npm 开发依赖接入任意业务项目，用来快速建立统一的 `Vitest + Playwright` 测试工作区。
 
 推荐把它理解成：
 
@@ -13,7 +13,7 @@
 
 ```mermaid
 flowchart TD
-    A["业务项目根目录"] --> B["安装 speccompass<br/>npm install -D speccompass"]
+    A["业务项目根目录"] --> B["安装 SpecCompass<br/>npm install -D spec-compass"]
     B --> C["执行 init<br/>npx speccompass init"]
     C --> D["生成统一 tests 结构与默认配置"]
     D --> E["编写测试代码"]
@@ -24,15 +24,15 @@ flowchart TD
 
 ## 接入步骤
 
-### 1. 安装 `speccompass`
+### 1. 安装 `spec-compass`
 
 在业务项目根目录执行：
 
 ```bash
-npm install -D speccompass vitest playwright
+npm install -D spec-compass vitest playwright
 ```
 
-宿主项目需要自己安装 `vitest` 和 `playwright`。`speccompass` 负责初始化和执行流程，不会代替宿主项目提供测试框架本体。
+宿主项目需要自己安装 `vitest` 和 `playwright`。`SpecCompass` 负责初始化和执行流程，不会代替宿主项目提供测试框架本体。
 
 ### 2. 初始化测试工作区
 

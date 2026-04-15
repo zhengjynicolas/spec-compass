@@ -91,8 +91,8 @@
     "durationMs": 6
   },
   "output": {
-    "outputDir": "/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results",
-    "textReportPath": "/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results/speccompass-report.txt",
-    "jsonReportPath": "/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results/speccompass-report.json"
+    "outputDir": "test-results",
+    "textReportPath": "test-results/speccompass-report.txt",
+    "jsonReportPath": "test-results/speccompass-report.json"
   }
 }

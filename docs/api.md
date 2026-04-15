@@ -13,6 +13,14 @@
 
 宿主项目常用命令：
 
+先安装：
+
+```bash
+npm install -D spec-compass vitest playwright
+```
+
+再执行：
+
 ```bash
 npx speccompass init
 npx speccompass run
@@ -27,7 +35,7 @@ npx speccompass run
 
 ### `runCLI(argv: string[]): Promise<void>`
 
-位置: [src/packages/core/cli.ts](/Users/jiayuzheng/GithubProjects/auto-test/src/packages/core/cli.ts)
+位置: [src/packages/core/cli.ts](../src/packages/core/cli.ts)
 
 CLI 总入口。负责：
 
@@ -37,7 +45,7 @@ CLI 总入口。负责：
 
 ### `initializeProject(projectPath: string): InitProjectResult`
 
-位置: [src/packages/core/initProject.ts](/Users/jiayuzheng/GithubProjects/auto-test/src/packages/core/initProject.ts)
+位置: [src/packages/core/initProject.ts](../src/packages/core/initProject.ts)
 
 初始化宿主项目，生成：
 
@@ -50,7 +58,7 @@ CLI 总入口。负责：
 
 ### `runTests(projectPath: string): Promise<RunTestsResult>`
 
-位置: [src/packages/core/runTests.ts](/Users/jiayuzheng/GithubProjects/auto-test/src/packages/core/runTests.ts)
+位置: [src/packages/core/runTests.ts](../src/packages/core/runTests.ts)
 
 执行主流程：
 
@@ -61,7 +69,7 @@ CLI 总入口。负责：
 
 ### `loadConfig(projectPath: string): Promise<TestingPlatformConfig>`
 
-位置: [src/packages/core/loadConfig.ts](/Users/jiayuzheng/GithubProjects/auto-test/src/packages/core/loadConfig.ts)
+位置: [src/packages/core/loadConfig.ts](../src/packages/core/loadConfig.ts)
 
 默认读取以下任一文件：
 
@@ -85,7 +93,7 @@ Playwright 产物默认输出到：
 
 ## 关键类型
 
-位置: [src/packages/core/types.ts](/Users/jiayuzheng/GithubProjects/auto-test/src/packages/core/types.ts)
+位置: [src/packages/core/types.ts](../src/packages/core/types.ts)
 
 最重要的类型：
 

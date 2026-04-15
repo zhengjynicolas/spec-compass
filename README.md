@@ -1,10 +1,10 @@
-# speccompass
+# SpecCompass
 
-`speccompass` 是一个很小的测试工具：用少量稳定代码统一 `Vitest + Playwright` 的初始化、执行、截图和结果输出。
+`SpecCompass` 是一个很小的测试工具：用少量稳定代码统一 `Vitest + Playwright` 的初始化、执行、截图和结果输出。
 
 ## 项目定位
 
-`speccompass` 主要解决 3 件事：
+`SpecCompass` 主要解决 3 件事：
 
 - 让任意项目都能快速接入一套统一的测试目录和默认配置
 - 让任意项目都能用统一命令执行 `Vitest` 和 `Playwright`
@@ -28,7 +28,7 @@
 
 ```text
 业务项目
-  -> 接入 speccompass
+  -> 接入 SpecCompass
   -> 执行 init
   -> 得到统一 tests 结构和默认配置
   -> 编写或补充测试代码
@@ -57,12 +57,12 @@ docs/
 推荐作为开发依赖安装到业务项目：
 
 ```bash
-npm install -D speccompass vitest playwright
+npm install -D spec-compass vitest playwright
 npx speccompass init
 npm run test:auto
 ```
 
-宿主项目需要自己安装 `vitest` 和 `playwright`。`speccompass` 会调用宿主项目里的测试命令，不会把这两个框架作为发布依赖一起带进去。
+宿主项目需要自己安装 `vitest` 和 `playwright`。`SpecCompass` 会调用宿主项目里的测试命令，不会把这两个框架作为发布依赖一起带进去。
 
 第一次执行 `init` 后，会自动创建：
 
@@ -73,7 +73,7 @@ npm run test:auto
 - `playwright.speccompass.config.ts`
 - `package.json` 里的 `test:auto*` 脚本
 
-更完整的接入说明见 [docs/guide.md](/Users/jiayuzheng/GithubProjects/auto-test/docs/guide.md)。
+更完整的接入说明见 [docs/guide.md](docs/guide.md)。
 
 ## 常用命令
 
@@ -117,7 +117,7 @@ export default {
 };
 ```
 
-完整示例见 [examples/project-a/tests/testing.config.ts](/Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/tests/testing.config.ts)。
+完整示例见 [examples/project-a/tests/testing.config.ts](examples/project-a/tests/testing.config.ts)。
 
 ## 结果与产物
 
@@ -148,7 +148,7 @@ export default {
 
 ## 本仓库开发
 
-如果你是在 `speccompass` 仓库自身里开发：
+如果你是在 `SpecCompass` 仓库自身里开发：
 
 ```bash
 npm install
@@ -166,10 +166,11 @@ CLI 只有两个有效命令：
 
 ## 文档
 
-- [docs/guide.md](/Users/jiayuzheng/GithubProjects/auto-test/docs/guide.md): 接入与使用说明
-- [docs/architecture.md](/Users/jiayuzheng/GithubProjects/auto-test/docs/architecture.md): 小内核架构说明
-- [docs/api.md](/Users/jiayuzheng/GithubProjects/auto-test/docs/api.md): 代码接口说明
+- [docs/guide.md](docs/guide.md): 接入与使用说明
+- [docs/npm-development.md](docs/npm-development.md): npm 本地联调与发包说明
+- [docs/architecture.md](docs/architecture.md): 小内核架构说明
+- [docs/api.md](docs/api.md): 代码接口说明
 
 ## 许可证
 
-本项目采用 [MIT License](/Users/jiayuzheng/GithubProjects/auto-test/LICENSE)。
+本项目采用 [MIT License](LICENSE)。

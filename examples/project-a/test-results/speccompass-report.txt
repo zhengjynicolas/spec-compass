@@ -1,9 +1,9 @@
 SpecCompass Report (project-a)
 hasFailures: no
 summary: suites=2, failed=0, skipped=0, failureDetails=0, artifacts=0, durationMs=6
-outputDir: /Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results
-textReport: /Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results/speccompass-report.txt
-jsonReport: /Users/jiayuzheng/GithubProjects/auto-test/examples/project-a/test-results/speccompass-report.json
+outputDir: test-results
+textReport: test-results/speccompass-report.txt
+jsonReport: test-results/speccompass-report.json
 - vitest: passed
   command: echo run --passWithNoTests --config /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-TqRUvS/vitest.speccompass.config.ts vitest demo executed --reporter=json --outputFile /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-report-A6kVhd/vitest.report.json
   summary: Vitest finished running via explicit.
