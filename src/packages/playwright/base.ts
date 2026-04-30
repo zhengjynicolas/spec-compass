@@ -1,4 +1,4 @@
-import type { PlaywrightRuntimeConfig, TestingPlatformConfig } from '../core/types';
+import type { PlaywrightRuntimeConfig, SpecCompassConfig } from '../core/types';
 
 export const baseConfig: PlaywrightRuntimeConfig = {
   outputDir: '.speccompass/artifacts',
@@ -12,7 +12,7 @@ export const baseConfig: PlaywrightRuntimeConfig = {
 };
 
 export function createPlaywrightConfig(
-  appConfig: TestingPlatformConfig,
+  appConfig: SpecCompassConfig,
 ): PlaywrightRuntimeConfig {
   return {
     ...baseConfig,

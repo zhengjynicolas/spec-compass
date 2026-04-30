@@ -7,6 +7,11 @@
   "main": "dist/index.js",
   "files": [
     "dist",
+    "docs",
+    "examples/project-a/package.json",
+    "examples/project-a/playwright.speccompass.config.ts",
+    "examples/project-a/tests",
+    "examples/project-a/vitest.speccompass.config.ts",
     "README.md",
     "LICENSE"
   ],

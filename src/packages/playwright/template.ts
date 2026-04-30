@@ -1,6 +1,6 @@
-import type { TestingPlatformConfig } from '../core/types';
+import type { SpecCompassConfig } from '../core/types';
 
-export function createPlaywrightConfigTemplate(appConfig: TestingPlatformConfig): string {
+export function createPlaywrightConfigTemplate(appConfig: SpecCompassConfig): string {
   const baseURL = appConfig.baseURL ?? 'http://localhost:3000';
   const testDir = appConfig.playwright?.testDir ?? 'tests/e2e';
   const headless = appConfig.playwright?.headless ?? true;

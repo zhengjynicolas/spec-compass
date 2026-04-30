@@ -3,6 +3,7 @@ import { runVitest } from '../vitest/runVitest';
 
 import { loadConfig } from './loadConfig';
 import { createEmptyResultOutput, writeRunResultFiles } from './output';
+import { redactLocalPaths } from './redactPaths';
 import { formatRunReport } from './report';
 import type { RunTestsResult, TestSuiteResult } from './types';
 
@@ -38,15 +39,16 @@ export async function runTests(projectPath: string): Promise<RunTestsResult> {
     output: createEmptyResultOutput(projectPath, config),
   };
 
+  const reportResult = redactLocalPaths(draftResult, projectPath);
   const output = writeRunResultFiles(
     projectPath,
     config,
-    formatRunReport(draftResult),
-    draftResult,
+    formatRunReport(reportResult),
+    reportResult,
   );
 
   return {
-    ...draftResult,
+    ...reportResult,
     output,
   };
 }

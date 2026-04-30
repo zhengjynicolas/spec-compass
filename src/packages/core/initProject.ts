@@ -4,7 +4,7 @@ import path from 'node:path';
 import { createPlaywrightTemplateFile } from '../playwright/templateFile';
 import { createVitestTemplateFile } from '../vitest/templateFile';
 
-import type { TestingPlatformConfig } from './types';
+import type { SpecCompassConfig } from './types';
 
 export interface InitProjectResult {
   projectPath: string;
@@ -134,7 +134,7 @@ export function initializeProject(projectPath: string): InitProjectResult {
   ensureDir(e2eDir, createdDirectories);
 
   const projectName = detectProjectName(projectPath);
-  const config: TestingPlatformConfig = {
+  const config: SpecCompassConfig = {
     name: projectName,
     baseURL: 'http://localhost:3000',
     vitest: {

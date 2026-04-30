@@ -67,7 +67,7 @@ CLI 总入口。负责：
 3. 运行 Playwright
 4. 生成文本报告和 JSON 报告
 
-### `loadConfig(projectPath: string): Promise<TestingPlatformConfig>`
+### `loadConfig(projectPath: string): Promise<SpecCompassConfig>`
 
 位置: [src/packages/core/loadConfig.ts](../src/packages/core/loadConfig.ts)
 
@@ -97,7 +97,7 @@ Playwright 产物默认输出到：
 
 最重要的类型：
 
-- `TestingPlatformConfig`
+- `SpecCompassConfig`
 - `RunTestsResult`
 - `TestSuiteResult`
 - `FailureDetail`

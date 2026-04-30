@@ -39,17 +39,17 @@
       "run",
       "--passWithNoTests",
       "--config",
-      "/var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-TqRUvS/vitest.speccompass.config.ts",
+      "<temp>/speccompass-vitest-4cfjGa/vitest.speccompass.config.ts",
       "vitest demo executed",
       "--reporter=json",
       "--outputFile",
-      "/var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-report-A6kVhd/vitest.report.json"
+      "<temp>/speccompass-vitest-report-mZh9q3/vitest.report.json"
     ],
     "exitCode": 0,
-    "stdout": "run --passWithNoTests --config /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-TqRUvS/vitest.speccompass.config.ts vitest demo executed --reporter=json --outputFile /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-vitest-report-A6kVhd/vitest.report.json\n",
+    "stdout": "run --passWithNoTests --config <temp>/speccompass-vitest-4cfjGa/vitest.speccompass.config.ts vitest demo executed --reporter=json --outputFile <temp>/speccompass-vitest-report-mZh9q3/vitest.report.json\n",
     "stderr": "",
     "summary": "Vitest finished running via explicit.",
-    "durationMs": 4,
+    "durationMs": 10,
     "failureDetails": [],
     "metrics": {
       "failureCount": 0,
@@ -65,12 +65,12 @@
       "test",
       "tests/e2e",
       "--config",
-      "/var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-playwright-jGXaIY/playwright.speccompass.config.cjs",
+      "<temp>/speccompass-playwright-jrPvO3/playwright.speccompass.config.cjs",
       "playwright demo executed",
       "--reporter=json"
     ],
     "exitCode": 0,
-    "stdout": "test tests/e2e --config /var/folders/kd/0nn1dyy57_jc92c5_3r1rllh0000gn/T/speccompass-playwright-jGXaIY/playwright.speccompass.config.cjs playwright demo executed --reporter=json\n",
+    "stdout": "test tests/e2e --config <temp>/speccompass-playwright-jrPvO3/playwright.speccompass.config.cjs playwright demo executed --reporter=json\n",
     "stderr": "",
     "summary": "Playwright finished running via explicit.",
     "durationMs": 2,
@@ -88,7 +88,7 @@
     "skippedSuites": 0,
     "totalFailures": 0,
     "totalArtifacts": 0,
-    "durationMs": 6
+    "durationMs": 12
   },
   "output": {
     "outputDir": "test-results",

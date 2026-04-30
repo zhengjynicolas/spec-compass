@@ -1,4 +1,4 @@
-export interface TestingPlatformConfig {
+export interface SpecCompassConfig {
   name: string;
   baseURL?: string;
   vitest?: VitestConfig;
@@ -60,7 +60,7 @@ export interface TestSuiteResult extends CommandExecutionResult {
 }
 
 export interface RunTestsResult {
-  config: TestingPlatformConfig;
+  config: SpecCompassConfig;
   vitest: TestSuiteResult;
   playwright: TestSuiteResult;
   hasFailures: boolean;

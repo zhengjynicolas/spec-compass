@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { TestingPlatformConfig, TestSuiteResult } from '../core/types';
+import type { SpecCompassConfig, TestSuiteResult } from '../core/types';
 import { deriveSuiteMetrics, parsePlaywrightFailures } from '../core/parseFailures';
 import { resolveCommand } from '../core/resolveCommand';
 import { runCommand } from '../core/runCommand';
@@ -23,7 +23,7 @@ function hasReporterArg(args: string[]): boolean {
 
 export async function runPlaywright(
   projectPath: string,
-  config: TestingPlatformConfig,
+  config: SpecCompassConfig,
 ): Promise<TestSuiteResult> {
   if (!config.playwright) {
     const result: TestSuiteResult = {

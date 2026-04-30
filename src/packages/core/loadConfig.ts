@@ -3,7 +3,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
 
-import type { TestingPlatformConfig } from './types';
+import type { SpecCompassConfig } from './types';
 
 const DEFAULT_CONFIG_FILE_NAMES = [
   'tests/testing.config.ts',
@@ -30,7 +30,7 @@ function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
 }
 
-function ensureConfig(value: unknown): TestingPlatformConfig {
+function ensureConfig(value: unknown): SpecCompassConfig {
   if (!isObject(value)) {
     throw new Error('testing.config must export a default object.');
   }
@@ -39,7 +39,7 @@ function ensureConfig(value: unknown): TestingPlatformConfig {
     throw new Error('testing.config must provide a non-empty "name".');
   }
 
-  return value as unknown as TestingPlatformConfig;
+  return value as unknown as SpecCompassConfig;
 }
 
 function resolveConfigPath(projectPath: string): string {
@@ -110,7 +110,7 @@ async function loadTypeScriptConfig(configPath: string): Promise<unknown> {
   return module.exports.default ?? module.exports;
 }
 
-export async function loadConfig(projectPath: string): Promise<TestingPlatformConfig> {
+export async function loadConfig(projectPath: string): Promise<SpecCompassConfig> {
   const configPath = resolveConfigPath(projectPath);
   const extension = path.extname(configPath);
   const config =

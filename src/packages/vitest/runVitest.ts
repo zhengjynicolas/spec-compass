@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { TestingPlatformConfig, TestSuiteResult } from '../core/types';
+import type { SpecCompassConfig, TestSuiteResult } from '../core/types';
 import { deriveSuiteMetrics, parseVitestFailures } from '../core/parseFailures';
 import { resolveCommand } from '../core/resolveCommand';
 import { runCommand } from '../core/runCommand';
@@ -31,7 +31,7 @@ function hasOutputFileArg(args: string[]): boolean {
 
 export async function runVitest(
   projectPath: string,
-  config: TestingPlatformConfig,
+  config: SpecCompassConfig,
 ): Promise<TestSuiteResult> {
   if (!config.vitest) {
     const result: TestSuiteResult = {
