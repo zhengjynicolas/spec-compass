@@ -46,6 +46,7 @@ export async function runCLI(argv: string[]): Promise<void> {
         `Created files: ${result.createdFiles.length > 0 ? result.createdFiles.join(', ') : 'none'}`,
         `Updated files: ${result.updatedFiles.length > 0 ? result.updatedFiles.join(', ') : 'none'}`,
         `Skipped existing: ${result.skippedFiles.length > 0 ? result.skippedFiles.join(', ') : 'none'}`,
+        'Agent workflow: keep .codex/skills/speccompass-workflow/SKILL.md and AGENTS.md in the host project so future agents can read the same SpecCompass workflow.',
       ].join('\n') + '\n',
     );
     return;

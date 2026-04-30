@@ -20,6 +20,10 @@ describe('initializeProject', () => {
     const result = initializeProject(projectPath);
 
     expect(fs.existsSync(path.join(projectPath, 'tests/testing.config.ts'))).toBe(true);
+    expect(
+      fs.existsSync(path.join(projectPath, '.codex/skills/speccompass-workflow/SKILL.md')),
+    ).toBe(true);
+    expect(fs.existsSync(path.join(projectPath, 'AGENTS.md'))).toBe(true);
     expect(fs.existsSync(path.join(projectPath, 'vitest.speccompass.config.ts'))).toBe(true);
     expect(fs.existsSync(path.join(projectPath, 'playwright.speccompass.config.ts'))).toBe(true);
     expect(result.createdDirectories).toEqual(
@@ -39,6 +43,10 @@ describe('initializeProject', () => {
     const testingConfig = fs.readFileSync(path.join(projectPath, 'tests/testing.config.ts'), 'utf8');
     expect(testingConfig).toContain('coverage: {');
     expect(testingConfig).toContain("reportsDirectory: 'coverage'");
+
+    const agentsInstructions = fs.readFileSync(path.join(projectPath, 'AGENTS.md'), 'utf8');
+    expect(agentsInstructions).toContain('.codex/skills/speccompass-workflow/SKILL.md');
+    expect(agentsInstructions).toContain('npm run test:auto');
 
     fs.rmSync(projectPath, { recursive: true, force: true });
   });

@@ -13,6 +13,7 @@
     "examples/project-a/tests",
     "examples/project-a/vitest.speccompass.config.ts",
     "README.md",
+    "SKILL.md",
     "LICENSE"
   ],
   "bin": {

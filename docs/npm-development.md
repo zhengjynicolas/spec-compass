@@ -18,6 +18,16 @@ npm install -D spec-compass
 npx speccompass init
 ```
 
+`init` 会把包内的 `SKILL.md` 复制到宿主项目：
+
+```text
+.codex/skills/speccompass-workflow/SKILL.md
+```
+
+同时它会创建或补充宿主项目的 `AGENTS.md`，让 agent 在测试任务里知道要读取这份 skill。
+
+需要注意：`npm install` 本身不会让 agent 自动“记住”工作流，它只会安装包文件。真正让 agent 在宿主仓库里稳定看见 workflow 的步骤是 `npx speccompass init`，然后把生成的 `.codex/skills/speccompass-workflow/SKILL.md` 和 `AGENTS.md` 一起保留在宿主项目中。
+
 ## 本地联调
 
 本地联调有 3 种常用方式。

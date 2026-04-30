@@ -52,6 +52,8 @@ CLI 总入口。负责：
 - `tests/testing.config.ts`
 - `tests/unit/`
 - `tests/e2e/`
+- `.codex/skills/speccompass-workflow/SKILL.md`
+- `AGENTS.md` 中的 SpecCompass 工作流提示
 - `vitest.speccompass.config.ts`
 - `playwright.speccompass.config.ts`
 - `package.json` 里的 `test:auto` / `test:auto:init`

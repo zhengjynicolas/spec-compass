@@ -70,11 +70,25 @@ npm run test:auto
 - `tests/testing.config.ts`
 - `tests/unit`
 - `tests/e2e`
+- `.codex/skills/speccompass-workflow/SKILL.md`
+- `AGENTS.md` 中的 SpecCompass 工作流提示
 - `vitest.speccompass.config.ts`
 - `playwright.speccompass.config.ts`
 - `package.json` 里的 `test:auto*` 脚本
 
 更完整的接入说明见 [docs/guide.md](docs/guide.md)。
+
+`SKILL.md` 会随 npm 包发布，并且 `init` 会把它复制到宿主项目的 `.codex/skills/speccompass-workflow/SKILL.md`。这样后续 agent 在这个项目里处理测试任务时，可以从项目内读取同一套工作流。
+
+### 让 agent 记住工作流
+
+`npm install` 只会把包内容放进 `node_modules/spec-compass`，大多数 agent 不会自动扫描任意 `node_modules` 下的说明文件。推荐流程是：
+
+1. 在宿主项目执行 `npx speccompass init`
+2. 保留并提交 `.codex/skills/speccompass-workflow/SKILL.md`
+3. 保留并提交 `AGENTS.md` 里的 SpecCompass 工作流提示
+
+这样新的 agent 会先看到项目根目录的 `AGENTS.md`，再按提示读取 `.codex/skills/speccompass-workflow/SKILL.md`。如果你使用的 agent 不会自动读取 `AGENTS.md`，就在第一次提问时明确说：“按 `.codex/skills/speccompass-workflow/SKILL.md` 生成和运行测试”。
 
 ## 常用命令
 

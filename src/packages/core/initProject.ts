@@ -6,6 +6,9 @@ import { createVitestTemplateFile } from '../vitest/templateFile';
 
 import type { SpecCompassConfig } from './types';
 
+const SPEC_COMPASS_AGENTS_SECTION_START = '<!-- speccompass:start -->';
+const SPEC_COMPASS_AGENTS_SECTION_END = '<!-- speccompass:end -->';
+
 export interface InitProjectResult {
   projectPath: string;
   createdDirectories: string[];
@@ -87,6 +90,57 @@ function writeFileIfMissing(
   createdFiles.push(filePath);
 }
 
+function readBundledSkill(): string {
+  const packageRoot = path.resolve(__dirname, '../../..');
+  return fs.readFileSync(path.join(packageRoot, 'SKILL.md'), 'utf8');
+}
+
+function createAgentsSection(): string {
+  return [
+    SPEC_COMPASS_AGENTS_SECTION_START,
+    '## SpecCompass Testing Workflow',
+    '',
+    'This project uses SpecCompass for automated testing. When adding, repairing, or running tests:',
+    '',
+    '- Read `.codex/skills/speccompass-workflow/SKILL.md` first if it exists.',
+    '- Use `npm run test:auto:init` to initialize or refresh the test workspace.',
+    '- Use `npm run test:auto` or `npx speccompass run` to execute tests.',
+    '- Put unit tests under `tests/unit/` and browser flow tests under `tests/e2e/`.',
+    '- Use `test-results/speccompass-report.json`, `coverage/coverage-summary.json`, and `.speccompass/artifacts/` as feedback for follow-up edits.',
+    '',
+    SPEC_COMPASS_AGENTS_SECTION_END,
+    '',
+  ].join('\n');
+}
+
+function ensureAgentsInstructions(
+  projectPath: string,
+  createdFiles: string[],
+  updatedFiles: string[],
+): void {
+  const agentsPath = path.join(projectPath, 'AGENTS.md');
+  const section = createAgentsSection();
+
+  if (!fs.existsSync(agentsPath)) {
+    fs.writeFileSync(
+      agentsPath,
+      ['# Agent Instructions', '', section].join('\n'),
+      'utf8',
+    );
+    createdFiles.push(agentsPath);
+    return;
+  }
+
+  const current = fs.readFileSync(agentsPath, 'utf8');
+  if (current.includes(SPEC_COMPASS_AGENTS_SECTION_START)) {
+    return;
+  }
+
+  const separator = current.endsWith('\n') ? '\n' : '\n\n';
+  fs.writeFileSync(agentsPath, `${current}${separator}${section}`, 'utf8');
+  updatedFiles.push(agentsPath);
+}
+
 function updatePackageJsonScripts(
   projectPath: string,
   updatedFiles: string[],
@@ -141,6 +195,9 @@ export function initializeProject(projectPath: string): InitProjectResult {
   ensureDir(unitDir, createdDirectories);
   ensureDir(e2eDir, createdDirectories);
 
+  const codexSkillsDir = path.join(projectPath, '.codex', 'skills', 'speccompass-workflow');
+  ensureDir(codexSkillsDir, createdDirectories);
+
   const projectName = detectProjectName(projectPath);
   const config: SpecCompassConfig = {
     name: projectName,
@@ -179,6 +236,13 @@ export function initializeProject(projectPath: string): InitProjectResult {
     skippedFiles,
   );
 
+  writeFileIfMissing(
+    path.join(codexSkillsDir, 'SKILL.md'),
+    readBundledSkill(),
+    createdFiles,
+    skippedFiles,
+  );
+
   const vitestConfigPath = path.join(projectPath, 'vitest.speccompass.config.ts');
   if (!fs.existsSync(vitestConfigPath)) {
     createVitestTemplateFile(projectPath, config);
@@ -196,6 +260,7 @@ export function initializeProject(projectPath: string): InitProjectResult {
   }
 
   updatePackageJsonScripts(projectPath, updatedFiles, skippedFiles);
+  ensureAgentsInstructions(projectPath, createdFiles, updatedFiles);
 
   return {
     projectPath,
