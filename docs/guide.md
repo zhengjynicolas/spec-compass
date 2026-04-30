@@ -18,7 +18,7 @@ flowchart TD
     C --> D["生成统一 tests 结构与默认配置"]
     D --> E["编写测试代码"]
     E --> F["执行 run"]
-    F --> G["输出报告、截图、trace、视频"]
+    F --> G["输出报告、覆盖率、截图、trace、视频"]
     G --> H["根据结果继续迭代"]
 ```
 
@@ -98,6 +98,11 @@ your-project/
 
 - `.speccompass/artifacts/`
 
+Vitest 覆盖率报告默认输出到：
+
+- `coverage/index.html`
+- `coverage/coverage-summary.json`
+
 这些产物的价值不仅是人读报告，也方便 agent 在后续回合继续消费。
 
 ## 常用命令
@@ -127,6 +132,14 @@ export default {
     testDir: 'tests/e2e',
     headless: true,
     trace: 'on-first-retry',
+  },
+  coverage: {
+    enabled: true,
+    provider: 'v8',
+    reportsDirectory: 'coverage',
+    reporter: ['text', 'html', 'json-summary'],
+    clean: true,
+    reportOnFailure: true,
   },
   artifacts: {
     outputDir: '.speccompass/artifacts',

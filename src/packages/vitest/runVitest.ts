@@ -29,6 +29,49 @@ function hasOutputFileArg(args: string[]): boolean {
   );
 }
 
+function hasCoverageArg(args: string[]): boolean {
+  return args.some(
+    (arg) =>
+      arg === '--coverage' ||
+      arg.startsWith('--coverage=') ||
+      arg.startsWith('--coverage.'),
+  );
+}
+
+function appendCoverageArgs(args: string[], runtimeConfig: ReturnType<typeof createVitestConfig>): void {
+  const coverage = runtimeConfig.coverage;
+
+  if (!coverage.enabled || hasCoverageArg(args)) {
+    return;
+  }
+
+  args.push('--coverage');
+  args.push(`--coverage.provider=${coverage.provider}`);
+  args.push(`--coverage.reportsDirectory=${coverage.reportsDirectory}`);
+  args.push(`--coverage.clean=${coverage.clean ? 'true' : 'false'}`);
+  args.push(`--coverage.reportOnFailure=${coverage.reportOnFailure ? 'true' : 'false'}`);
+
+  if (coverage.all !== undefined) {
+    args.push(`--coverage.all=${coverage.all ? 'true' : 'false'}`);
+  }
+
+  for (const reporter of coverage.reporter) {
+    args.push(`--coverage.reporter=${reporter}`);
+  }
+}
+
+function createCoverageOutput(runtimeConfig: ReturnType<typeof createVitestConfig>) {
+  const coverage = runtimeConfig.coverage;
+  const reportsDirectory = coverage.reportsDirectory;
+
+  return {
+    enabled: coverage.enabled,
+    reportsDirectory,
+    htmlReportPath: path.join(reportsDirectory, 'index.html'),
+    summaryPath: path.join(reportsDirectory, 'coverage-summary.json'),
+  };
+}
+
 export async function runVitest(
   projectPath: string,
   config: SpecCompassConfig,
@@ -80,6 +123,8 @@ export async function runVitest(
     args.push(...config.vitest.args);
   }
 
+  appendCoverageArgs(args, runtimeConfig);
+
   const jsonReportPath = createVitestJsonReportPath(projectPath);
   if (!hasReporterArg(args)) {
     args.push('--reporter=json');
@@ -122,6 +167,7 @@ export async function runVitest(
       stderr: result.stderr,
     }),
     artifacts: [],
+    coverage: createCoverageOutput(runtimeConfig),
   };
 
   return suiteResult;

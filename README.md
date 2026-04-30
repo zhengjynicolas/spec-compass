@@ -8,7 +8,7 @@
 
 - 让任意项目都能快速接入一套统一的测试目录和默认配置
 - 让任意项目都能用统一命令执行 `Vitest` 和 `Playwright`
-- 让失败报告、截图、trace、视频等产物稳定落到固定目录
+- 让失败报告、覆盖率、截图、trace、视频等产物稳定落到固定目录
 
 ## 设计原则
 
@@ -22,6 +22,7 @@
 - `init`: 初始化测试目录、默认配置和脚本
 - `run`: 统一执行 `Vitest` 与 `Playwright`
 - 结构化结果输出：文本报告 + JSON 报告
+- Vitest 覆盖率报告：默认生成 HTML 与 JSON summary
 - Playwright 失败产物收集：截图、trace、视频
 
 ## 推荐工作流
@@ -33,7 +34,7 @@
   -> 得到统一 tests 结构和默认配置
   -> 编写或补充测试代码
   -> 执行 run
-  -> 查看 test-results 与 Playwright 截图产物
+  -> 查看 test-results、coverage 与 Playwright 截图产物
   -> 根据结果继续迭代
 ```
 
@@ -105,6 +106,14 @@ export default {
     headless: true,
     trace: 'on-first-retry',
   },
+  coverage: {
+    enabled: true,
+    provider: 'v8',
+    reportsDirectory: 'coverage',
+    reporter: ['text', 'html', 'json-summary'],
+    clean: true,
+    reportOnFailure: true,
+  },
   artifacts: {
     outputDir: '.speccompass/artifacts',
     screenshot: 'only-on-failure',
@@ -125,6 +134,11 @@ export default {
 
 - `test-results/speccompass-report.txt`
 - `test-results/speccompass-report.json`
+
+Vitest 覆盖率报告会默认写入：
+
+- `coverage/index.html`
+- `coverage/coverage-summary.json`
 
 如果 Playwright 运行中生成了截图、trace 或视频，默认会落到：
 

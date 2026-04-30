@@ -36,6 +36,10 @@ describe('initializeProject', () => {
     expect(packageJson.scripts['test:auto']).toBe('speccompass run');
     expect(packageJson.scripts['test:auto:init']).toBe('speccompass init');
 
+    const testingConfig = fs.readFileSync(path.join(projectPath, 'tests/testing.config.ts'), 'utf8');
+    expect(testingConfig).toContain('coverage: {');
+    expect(testingConfig).toContain("reportsDirectory: 'coverage'");
+
     fs.rmSync(projectPath, { recursive: true, force: true });
   });
 });

@@ -13,7 +13,7 @@ Treat `SpecCompass` as a small execution kernel:
 
 - `init` creates the standard test workspace
 - `run` executes Vitest and Playwright
-- reports and Playwright artifacts become the feedback loop for further edits
+- coverage, reports, and Playwright artifacts become the feedback loop for further edits
 
 Do not treat this repo as a general testing platform. Prefer simple workflows and minimal abstraction.
 
@@ -30,6 +30,8 @@ Do not treat this repo as a general testing platform. Prefer simple workflows an
 7. Read:
    - `test-results/speccompass-report.txt`
    - `test-results/speccompass-report.json`
+   - `coverage/coverage-summary.json`
+   - `coverage/index.html`
    - `.speccompass/artifacts/` when Playwright failures produce screenshots, traces, or video
 8. Iterate until tests are stable or you hit a real blocker.
 
@@ -72,6 +74,7 @@ Also expect package scripts:
 - run Vitest
 - run Playwright
 - write text and JSON reports to `test-results/`
+- write Vitest coverage reports to `coverage/`
 - collect Playwright artifacts when present
 
 Use those outputs as the source of truth for follow-up edits.

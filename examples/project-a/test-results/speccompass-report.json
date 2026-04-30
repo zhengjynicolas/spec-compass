@@ -21,6 +21,18 @@
       "headless": true,
       "trace": "on-first-retry"
     },
+    "coverage": {
+      "enabled": true,
+      "provider": "v8",
+      "reportsDirectory": "coverage",
+      "reporter": [
+        "text",
+        "html",
+        "json-summary"
+      ],
+      "clean": true,
+      "reportOnFailure": true
+    },
     "artifacts": {
       "outputDir": ".speccompass/artifacts",
       "screenshot": "only-on-failure",
@@ -39,23 +51,37 @@
       "run",
       "--passWithNoTests",
       "--config",
-      "<temp>/speccompass-vitest-4cfjGa/vitest.speccompass.config.ts",
+      "<temp>/speccompass-vitest-ScCpcO/vitest.speccompass.config.ts",
       "vitest demo executed",
+      "--coverage",
+      "--coverage.provider=v8",
+      "--coverage.reportsDirectory=coverage",
+      "--coverage.clean=true",
+      "--coverage.reportOnFailure=true",
+      "--coverage.reporter=text",
+      "--coverage.reporter=html",
+      "--coverage.reporter=json-summary",
       "--reporter=json",
       "--outputFile",
-      "<temp>/speccompass-vitest-report-mZh9q3/vitest.report.json"
+      "<temp>/speccompass-vitest-report-4uZSoI/vitest.report.json"
     ],
     "exitCode": 0,
-    "stdout": "run --passWithNoTests --config <temp>/speccompass-vitest-4cfjGa/vitest.speccompass.config.ts vitest demo executed --reporter=json --outputFile <temp>/speccompass-vitest-report-mZh9q3/vitest.report.json\n",
+    "stdout": "run --passWithNoTests --config <temp>/speccompass-vitest-ScCpcO/vitest.speccompass.config.ts vitest demo executed --coverage --coverage.provider=v8 --coverage.reportsDirectory=coverage --coverage.clean=true --coverage.reportOnFailure=true --coverage.reporter=text --coverage.reporter=html --coverage.reporter=json-summary --reporter=json --outputFile <temp>/speccompass-vitest-report-4uZSoI/vitest.report.json\n",
     "stderr": "",
     "summary": "Vitest finished running via explicit.",
-    "durationMs": 10,
+    "durationMs": 6,
     "failureDetails": [],
     "metrics": {
       "failureCount": 0,
       "warningCount": 0
     },
-    "artifacts": []
+    "artifacts": [],
+    "coverage": {
+      "enabled": true,
+      "reportsDirectory": "coverage",
+      "htmlReportPath": "coverage/index.html",
+      "summaryPath": "coverage/coverage-summary.json"
+    }
   },
   "playwright": {
     "suite": "playwright",
@@ -65,15 +91,15 @@
       "test",
       "tests/e2e",
       "--config",
-      "<temp>/speccompass-playwright-jrPvO3/playwright.speccompass.config.cjs",
+      "<temp>/speccompass-playwright-ldIHzC/playwright.speccompass.config.cjs",
       "playwright demo executed",
       "--reporter=json"
     ],
     "exitCode": 0,
-    "stdout": "test tests/e2e --config <temp>/speccompass-playwright-jrPvO3/playwright.speccompass.config.cjs playwright demo executed --reporter=json\n",
+    "stdout": "test tests/e2e --config <temp>/speccompass-playwright-ldIHzC/playwright.speccompass.config.cjs playwright demo executed --reporter=json\n",
     "stderr": "",
     "summary": "Playwright finished running via explicit.",
-    "durationMs": 2,
+    "durationMs": 4,
     "failureDetails": [],
     "metrics": {
       "failureCount": 0,
@@ -88,7 +114,7 @@
     "skippedSuites": 0,
     "totalFailures": 0,
     "totalArtifacts": 0,
-    "durationMs": 12
+    "durationMs": 10
   },
   "output": {
     "outputDir": "test-results",

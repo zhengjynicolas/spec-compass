@@ -65,7 +65,7 @@ CLI 总入口。负责：
 1. 读取项目配置
 2. 运行 Vitest
 3. 运行 Playwright
-4. 生成文本报告和 JSON 报告
+4. 生成覆盖率、文本报告和 JSON 报告
 
 ### `loadConfig(projectPath: string): Promise<SpecCompassConfig>`
 
@@ -86,6 +86,11 @@ CLI 总入口。负责：
 
 - `test-results/speccompass-report.txt`
 - `test-results/speccompass-report.json`
+
+Vitest 覆盖率默认输出到：
+
+- `coverage/index.html`
+- `coverage/coverage-summary.json`
 
 Playwright 产物默认输出到：
 

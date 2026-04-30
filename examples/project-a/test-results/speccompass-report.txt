@@ -1,22 +1,25 @@
 SpecCompass Report (project-a)
 hasFailures: no
-summary: suites=2, failed=0, skipped=0, failureDetails=0, artifacts=0, durationMs=12
+summary: suites=2, failed=0, skipped=0, failureDetails=0, artifacts=0, durationMs=10
 outputDir: test-results
 textReport: test-results/speccompass-report.txt
 jsonReport: test-results/speccompass-report.json
 - vitest: passed
-  command: echo run --passWithNoTests --config <temp>/speccompass-vitest-4cfjGa/vitest.speccompass.config.ts vitest demo executed --reporter=json --outputFile <temp>/speccompass-vitest-report-mZh9q3/vitest.report.json
+  command: echo run --passWithNoTests --config <temp>/speccompass-vitest-ScCpcO/vitest.speccompass.config.ts vitest demo executed --coverage --coverage.provider=v8 --coverage.reportsDirectory=coverage --coverage.clean=true --coverage.reportOnFailure=true --coverage.reporter=text --coverage.reporter=html --coverage.reporter=json-summary --reporter=json --outputFile <temp>/speccompass-vitest-report-4uZSoI/vitest.report.json
   summary: Vitest finished running via explicit.
   exitCode: 0
-  durationMs: 10
+  durationMs: 6
   failures: 0
   warnings: 0
   artifacts: 0
+  coverage: coverage
+  coverageHtml: coverage/index.html
+  coverageSummary: coverage/coverage-summary.json
 - playwright: passed
-  command: echo test tests/e2e --config <temp>/speccompass-playwright-jrPvO3/playwright.speccompass.config.cjs playwright demo executed --reporter=json
+  command: echo test tests/e2e --config <temp>/speccompass-playwright-ldIHzC/playwright.speccompass.config.cjs playwright demo executed --reporter=json
   summary: Playwright finished running via explicit.
   exitCode: 0
-  durationMs: 2
+  durationMs: 4
   failures: 0
   warnings: 0
   artifacts: 0

@@ -14,6 +14,14 @@ export default {
     headless: true,
     trace: 'on-first-retry',
   },
+  coverage: {
+    enabled: true,
+    provider: 'v8',
+    reportsDirectory: 'coverage',
+    reporter: ['text', 'html', 'json-summary'],
+    clean: true,
+    reportOnFailure: true,
+  },
   artifacts: {
     outputDir: '.speccompass/artifacts',
     screenshot: 'only-on-failure',

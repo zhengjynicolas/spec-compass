@@ -3,6 +3,7 @@ export interface SpecCompassConfig {
   baseURL?: string;
   vitest?: VitestConfig;
   playwright?: PlaywrightConfig;
+  coverage?: CoverageConfig;
   artifacts?: ArtifactsConfig;
   results?: ResultsConfig;
 }
@@ -31,6 +32,16 @@ export interface ArtifactsConfig {
   trace?: 'off' | 'on' | 'retain-on-failure' | 'on-first-retry';
 }
 
+export interface CoverageConfig {
+  enabled?: boolean;
+  provider?: 'v8' | 'istanbul';
+  reportsDirectory?: string;
+  reporter?: string[];
+  all?: boolean;
+  clean?: boolean;
+  reportOnFailure?: boolean;
+}
+
 export interface ResultsConfig {
   outputDir?: string;
 }
@@ -57,6 +68,7 @@ export interface TestSuiteResult extends CommandExecutionResult {
   failureDetails: FailureDetail[];
   metrics: SuiteMetrics;
   artifacts: ArtifactFile[];
+  coverage?: CoverageOutput;
 }
 
 export interface RunTestsResult {
@@ -83,6 +95,13 @@ export interface PlaywrightRuntimeConfig {
 export interface VitestRuntimeConfig {
   include: string[];
   passWithNoTests: boolean;
+  coverage: Required<
+    Pick<
+      CoverageConfig,
+      'enabled' | 'provider' | 'reportsDirectory' | 'reporter' | 'clean' | 'reportOnFailure'
+    >
+  > &
+    Pick<CoverageConfig, 'all'>;
 }
 
 export interface FailureDetail {
@@ -110,6 +129,13 @@ export interface RunSummary {
 export interface ArtifactFile {
   type: 'screenshot' | 'trace' | 'video' | 'other';
   path: string;
+}
+
+export interface CoverageOutput {
+  enabled: boolean;
+  reportsDirectory: string;
+  htmlReportPath: string;
+  summaryPath: string;
 }
 
 export interface ResultOutputFiles {

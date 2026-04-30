@@ -33,6 +33,12 @@ function formatSuiteResult(result: TestSuiteResult): string {
     );
   }
 
+  if (result.coverage?.enabled) {
+    lines.push(`  coverage: ${result.coverage.reportsDirectory}`);
+    lines.push(`  coverageHtml: ${result.coverage.htmlReportPath}`);
+    lines.push(`  coverageSummary: ${result.coverage.summaryPath}`);
+  }
+
   return lines.join('\n');
 }
 
