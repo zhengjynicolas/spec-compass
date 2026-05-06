@@ -47,6 +47,42 @@ describe('initializeProject', () => {
     const agentsInstructions = fs.readFileSync(path.join(projectPath, 'AGENTS.md'), 'utf8');
     expect(agentsInstructions).toContain('.codex/skills/speccompass-workflow/SKILL.md');
     expect(agentsInstructions).toContain('npm run test:auto');
+    expect(agentsInstructions).toContain('real user tasks');
+
+    fs.rmSync(projectPath, { recursive: true, force: true });
+  });
+
+  it('refreshes managed agent workflow files on repeated init', () => {
+    const projectPath = fs.mkdtempSync(path.join(os.tmpdir(), 'speccompass-init-refresh-'));
+    fs.writeFileSync(
+      path.join(projectPath, 'package.json'),
+      `${JSON.stringify({ name: 'refresh-project', private: true, scripts: {} }, null, 2)}\n`,
+      'utf8',
+    );
+
+    initializeProject(projectPath);
+
+    const skillPath = path.join(projectPath, '.codex/skills/speccompass-workflow/SKILL.md');
+    const agentsPath = path.join(projectPath, 'AGENTS.md');
+    fs.writeFileSync(skillPath, 'old skill\n', 'utf8');
+    fs.writeFileSync(
+      agentsPath,
+      [
+        '# Agent Instructions',
+        '',
+        '<!-- speccompass:start -->',
+        'old section',
+        '<!-- speccompass:end -->',
+        '',
+      ].join('\n'),
+      'utf8',
+    );
+
+    const result = initializeProject(projectPath);
+
+    expect(fs.readFileSync(skillPath, 'utf8')).toContain('E2E User Journey Guidance');
+    expect(fs.readFileSync(agentsPath, 'utf8')).toContain('real user tasks');
+    expect(result.updatedFiles).toEqual(expect.arrayContaining([skillPath, agentsPath]));
 
     fs.rmSync(projectPath, { recursive: true, force: true });
   });

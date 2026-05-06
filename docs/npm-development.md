@@ -48,7 +48,7 @@ npm link
 
 ```bash
 npm link spec-compass
-npm install -D vitest playwright
+npm install -D vitest @playwright/test
 npx speccompass init
 ```
 
@@ -85,7 +85,7 @@ npm unlink
 
 ```bash
 npm install -D ../path/to/speccompass-repo
-npm install -D vitest playwright
+npm install -D vitest @playwright/test
 ```
 
 或者直接写成：
@@ -128,7 +128,7 @@ spec-compass-0.1.0.tgz
 
 ```bash
 npm install -D /absolute/path/to/spec-compass-0.1.0.tgz
-npm install -D vitest playwright
+npm install -D vitest @playwright/test
 npx speccompass init
 ```
 
@@ -244,14 +244,14 @@ npm pack
 
 ## 常见问题
 
-### 为什么宿主项目还要自己安装 `vitest` 和 `playwright`？
+### 为什么宿主项目还要自己安装 `vitest` 和 `@playwright/test`？
 
 因为 `SpecCompass` 只负责初始化和执行流程，不把测试框架本体作为发布依赖一起带进去。
 
 宿主项目推荐安装：
 
 ```bash
-npm install -D spec-compass vitest playwright
+npm install -D spec-compass vitest @playwright/test
 ```
 
 ### 为什么我改了包代码，宿主项目没生效？

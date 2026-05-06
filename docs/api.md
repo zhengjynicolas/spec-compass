@@ -16,7 +16,7 @@
 先安装：
 
 ```bash
-npm install -D spec-compass vitest playwright
+npm install -D spec-compass vitest @playwright/test
 ```
 
 再执行：
@@ -29,7 +29,7 @@ npx speccompass run
 前提：
 
 - 宿主项目已安装 `vitest`
-- 宿主项目已安装 `playwright`
+- 宿主项目已安装 `@playwright/test`
 
 ## 核心入口
 

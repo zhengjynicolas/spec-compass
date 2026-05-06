@@ -51,7 +51,7 @@ export async function runPlaywright(
     cwd: projectPath,
     explicitCommand: config.playwright.command,
     localBinaryName: 'playwright',
-    packageManagerPackage: 'playwright',
+    packageManagerPackage: '@playwright/test',
   });
   const args = [...resolved.args, ...DEFAULT_PLAYWRIGHT_ARGS];
 
@@ -86,7 +86,7 @@ export async function runPlaywright(
     args,
     summary: `Playwright finished running via ${resolved.resolution}.`,
     missingCommandSummary:
-      'Playwright command was not found. Install it locally or configure playwright.command.',
+      'Playwright command was not found. Install @playwright/test locally or configure playwright.command.',
   });
 
   if (generatedConfigPath && fs.existsSync(generatedConfigPath)) {

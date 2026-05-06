@@ -1,60 +1,78 @@
-# Agent 规则：Polyglot Monorepo Tech Lead
+# AGENTS.md
 
-> 本文件是 Agent 行为的唯一规则源。
+Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
 
-## 适用范围
-- 本文件适用于整个仓库。
-- 子目录下的 `AGENTS.md` 可以补充更严格的本地规则。
+**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
 
-## 决策方式
-- 涉及依赖或库选型时，在最终选择前提供 `7-10` 个候选方案和对比表。
-- 涉及重大架构决策时，提供 `2-3` 个可行方案，并说明取舍。
-- 常规实现任务在做出合理假设后直接执行。
-- 先识别项目技术栈，再遵循各子项目现有的风格和约定。
+## 1. Think Before Coding
 
-## 依赖管理
-- 在 monorepo 内优先复用已有库，避免引入功能重叠的依赖。
-- 优先选择成熟、活跃维护的社区方案。
-- 只有在价值明确且没有合适现有方案时，才新增依赖。
-- 当成熟且足够合适的社区方案已经存在时，不要从零自研大型工具或大型功能替代方案。
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
 
-## 代码设计
-- 遵循 DRY 和模块化设计，避免复制粘贴式实现。
-- 文件大小保持在合理范围内，实践目标为单文件不超过 `500` 行。
-- 尊重 monorepo 边界，避免非法跨模块引用。
-- 跨项目共享逻辑放在 `packages/` 或指定的共享包中。
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
 
-## UI / 前端
-- 保持当前产品的视觉语言和既有设计模式。
-- 优先复用已有组件和样式，不默认引入新的 UI 体系。
-- 只有在任务明确要求时，才引入外部 UI skill 或 UI 库。
+## 2. Simplicity First
 
-## 工程化与 CI/CD
-- 优先采用现代工具链：Node `22+`，能用 TypeScript 的地方优先 TypeScript。
-- 默认使用仓库现有的 formatter、linter 和 test 命令。
-- GitHub Actions 中使用 zsh 脚本时，显式设置 `shell: zsh {0}`。
-- YAML 的脚本行如果包含 `:`（例如 URL 或 `echo "Status: OK"`），整行加引号，避免解析问题。
-- 优先维护自动化流程，不要把重复性的操作转给用户手动执行。
+**Minimum code that solves the problem. Nothing speculative.**
 
-## 安全与变更策略
-- 优先采用最小侵入式修改（先扩展或包装，再考虑重写）。
-- 不要静默删除业务逻辑。
-- 以下高风险或破坏性变更必须先明确确认：
-- 数据删除或不可逆迁移
-- 安全敏感配置变更
-- 跨模块的重大行为修改
-- 普通功能开发和缺陷修复可以直接实现，但要清楚说明影响范围。
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
 
-## Token 与沟通效率
-- 优先使用 diff 导向的最小代码输出，以及简洁、结构化的说明。
-- 保持上下文聚焦，只总结必要信息。
-- 只有在不确定性会阻碍安全执行时，才提出简洁的澄清问题。
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
 
-## 风险控制
-- 如果依赖活跃度低、长期无人维护或许可证不明确，要明确提示风险。
-- 提供替代方案时，说明迁移成本（`low/medium/high`）和运行时影响。
+## 3. Surgical Changes
 
-## 对比表（库选型必需）
-| 名称 | Star / 下载量 | 核心能力 | URL | License | 维护状态 | 匹配度评分 (1-5) | 适配原因 |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| [库名] | [数据] | [简述] | [链接] | [类型] | [活跃/停滞] | [评分] | [原因] |
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+---
+
+**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+
+<!-- speccompass:start -->
+## SpecCompass Testing Workflow
+
+This project uses SpecCompass for automated testing. When adding, repairing, or running tests:
+
+- Read `.codex/skills/speccompass-workflow/SKILL.md` first if it exists.
+- Use `npm run test:auto:init` to initialize or refresh the test workspace.
+- Use `npm run test:auto` or `npx speccompass run` to execute tests.
+- Put unit tests under `tests/unit/` and browser flow tests under `tests/e2e/`.
+- Use `test-results/speccompass-report.json`, `coverage/coverage-summary.json`, and `.speccompass/artifacts/` as feedback for follow-up edits.
+
+<!-- speccompass:end -->

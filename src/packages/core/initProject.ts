@@ -90,6 +90,25 @@ function writeFileIfMissing(
   createdFiles.push(filePath);
 }
 
+function writeManagedFile(
+  filePath: string,
+  contents: string,
+  createdFiles: string[],
+  updatedFiles: string[],
+): void {
+  if (!fs.existsSync(filePath)) {
+    fs.writeFileSync(filePath, contents, 'utf8');
+    createdFiles.push(filePath);
+    return;
+  }
+
+  const current = fs.readFileSync(filePath, 'utf8');
+  if (current !== contents) {
+    fs.writeFileSync(filePath, contents, 'utf8');
+    updatedFiles.push(filePath);
+  }
+}
+
 function readBundledSkill(): string {
   const packageRoot = path.resolve(__dirname, '../../..');
   return fs.readFileSync(path.join(packageRoot, 'SKILL.md'), 'utf8');
@@ -105,7 +124,8 @@ function createAgentsSection(): string {
     '- Read `.codex/skills/speccompass-workflow/SKILL.md` first if it exists.',
     '- Use `npm run test:auto:init` to initialize or refresh the test workspace.',
     '- Use `npm run test:auto` or `npx speccompass run` to execute tests.',
-    '- Put unit tests under `tests/unit/` and browser flow tests under `tests/e2e/`.',
+    '- Put unit tests under `tests/unit/` and user-journey E2E tests under `tests/e2e/`.',
+    '- Write Playwright flows as real user tasks with role/label/text locators and user-visible assertions.',
     '- Use `test-results/speccompass-report.json`, `coverage/coverage-summary.json`, and `.speccompass/artifacts/` as feedback for follow-up edits.',
     '',
     SPEC_COMPASS_AGENTS_SECTION_END,
@@ -132,7 +152,19 @@ function ensureAgentsInstructions(
   }
 
   const current = fs.readFileSync(agentsPath, 'utf8');
-  if (current.includes(SPEC_COMPASS_AGENTS_SECTION_START)) {
+  const startIndex = current.indexOf(SPEC_COMPASS_AGENTS_SECTION_START);
+  if (startIndex >= 0) {
+    const endIndex = current.indexOf(SPEC_COMPASS_AGENTS_SECTION_END, startIndex);
+    if (endIndex < 0) {
+      return;
+    }
+
+    const afterEndIndex = endIndex + SPEC_COMPASS_AGENTS_SECTION_END.length;
+    const next = `${current.slice(0, startIndex)}${section}${current.slice(afterEndIndex).replace(/^\n+/, '')}`;
+    if (next !== current) {
+      fs.writeFileSync(agentsPath, next, 'utf8');
+      updatedFiles.push(agentsPath);
+    }
     return;
   }
 
@@ -236,11 +268,11 @@ export function initializeProject(projectPath: string): InitProjectResult {
     skippedFiles,
   );
 
-  writeFileIfMissing(
+  writeManagedFile(
     path.join(codexSkillsDir, 'SKILL.md'),
     readBundledSkill(),
     createdFiles,
-    skippedFiles,
+    updatedFiles,
   );
 
   const vitestConfigPath = path.join(projectPath, 'vitest.speccompass.config.ts');

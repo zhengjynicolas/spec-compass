@@ -58,12 +58,12 @@ docs/
 推荐作为开发依赖安装到业务项目：
 
 ```bash
-npm install -D spec-compass vitest playwright
+npm install -D spec-compass vitest @playwright/test
 npx speccompass init
 npm run test:auto
 ```
 
-宿主项目需要自己安装 `vitest` 和 `playwright`。`SpecCompass` 会调用宿主项目里的测试命令，不会把这两个框架作为发布依赖一起带进去。
+宿主项目需要自己安装 `vitest` 和 `@playwright/test`。`SpecCompass` 会调用宿主项目里的测试命令，不会把这两个框架作为发布依赖一起带进去。
 
 第一次执行 `init` 后，会自动创建：
 
@@ -103,6 +103,12 @@ npx speccompass run
 npm run test:auto
 npm run test:auto:init
 ```
+
+## E2E 用户旅程
+
+E2E 测试优先写成真实用户任务，而不是页面实现细节脚本。浏览器自动化、截图、视频和 trace 由 `@playwright/test` 负责；`jsdom` 可以作为组件/DOM 快速测试层与 Playwright 搭配使用，但不替代 E2E。
+
+给 agent 使用的核心规则在 `SKILL.md`，`init` 会把它复制到宿主项目的 `.codex/skills/speccompass-workflow/SKILL.md`。
 
 ## 默认配置
 

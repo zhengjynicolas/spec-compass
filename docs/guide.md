@@ -29,10 +29,10 @@ flowchart TD
 在业务项目根目录执行：
 
 ```bash
-npm install -D spec-compass vitest playwright
+npm install -D spec-compass vitest @playwright/test
 ```
 
-宿主项目需要自己安装 `vitest` 和 `playwright`。`SpecCompass` 负责初始化和执行流程，不会代替宿主项目提供测试框架本体。
+宿主项目需要自己安装 `vitest` 和 `@playwright/test`。`SpecCompass` 负责初始化和执行流程，不会代替宿主项目提供测试框架本体。
 
 ### 2. 初始化测试工作区
 
@@ -66,6 +66,12 @@ npx speccompass init
 
 - `tests/unit/**/*.test.ts`
 - `tests/e2e/**/*.spec.ts`
+
+E2E 测试应优先覆盖真实用户旅程：从用户目标出发，用 role、label、text 等可感知选择器操作页面，断言用户能看到的结果。
+
+截图、视频、trace 和真实浏览器输入走 `@playwright/test`；如果项目还需要组件/DOM 层的轻量交互测试，建议搭配加入 `jsdom` 和 Testing Library。
+
+agent 侧以 `.codex/skills/speccompass-workflow/SKILL.md` 为准；本文档只提供给人看的背景解释。
 
 ### 4. 执行测试
 

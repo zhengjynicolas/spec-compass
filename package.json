@@ -1,6 +1,6 @@
 {
   "name": "spec-compass",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "SpecCompass is a lightweight Vitest and Playwright init/run kernel for host projects.",
   "private": false,
   "type": "commonjs",
@@ -28,6 +28,14 @@
     "npm"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhengjynicolas/spec-compass.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zhengjynicolas/spec-compass/issues"
+  },
+  "homepage": "https://github.com/zhengjynicolas/spec-compass#readme",
   "publishConfig": {
     "access": "public"
   },
